@@ -1,0 +1,12 @@
+from torchvision import models
+class ResNet18(nn.Module):
+    def __init__(self, num_classes=10):
+        super().__init__()
+        self.backbone = models.resnet18(weights=None) #成员变量继承resnet18
+        self.backbone.fc = nn.Linear(512, num_classes) #修改全连接层输出维度，满足特定类别输出
+    def forward(self,x):
+        x = self.backbone(x)
+        return x
+
+if __name__ = "__main__":
+    model = Resnet18(10)
